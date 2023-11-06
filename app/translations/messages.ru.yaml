@@ -1,0 +1,28 @@
+success: true
+failed: false
+email_approved: Email подтвержден
+user_already_exists: Пользователь уже существует
+user_could_not_be_found: Невозможно найти пользователя
+user_block: Пользователь заблокирован
+country_could_not_be_found: Не удается найти страну
+messenger_could_not_be_found: Не удается найти мессенджер
+organization_already_exists: Юр.лицо уже существует
+organization_could_not_be_found: Не удается найти юр.лицо
+organization_type_could_not_be_found: Не удается найти тип юр.лица
+code_sent: Код отправлен
+password_recovery: Восстановление пароля
+invitation: Приглашение
+address_could_not_be_found: Не удается найти адрес
+password_no_match: Пароли не совпадают
+new_password_matches_old: Новый пароль не должен совпадать с текущим
+article_could_not_be_found: Новость не может быть найдена
+password_no_matches_with_bd: Старый пароль не совпадает с текущим
+organization_does_not_belong_to_you: Организация не принадлежит авторизованному пользователю
+image_could_not_be_uploaded: Изображение не может быть загружено
+organization_exists_user_could_not_be_created: Организация уже существует, пользователь не может быть создан
+employee_could_not_be_found: Сотрудник не найден
+this_is_not_your_employee: Сотрудник не принадлежит организациям авторизованного пользователя
+product_could_not_be_found: Не удается найти товар
+phone_already_exists: Телефон уже существует
+organization_no_active: Некорректные данные организации
+appeal_could_not_be_found: Обращения/претензии не найдены

@@ -1,0 +1,18 @@
+meilisearch:
+    url: '%env(MEILISEARCH_URL)%' # URL of the Meilisearch server (mandatory)
+    api_key: '%env(MEILISEARCH_API_KEY)%' # API key to access the Meilisearch server (mandatory)
+    prefix: '%env(MEILISEARCH_PREFIX)%'
+    indices:
+        - name: product
+          class: App\Entity\Product\Product
+          enable_serializer_groups: true
+          index_if: isSearchable
+          settings:
+            sortableAttributes: ['sortingNumber']
+            filterableAttributes: ['brand.id', 'category.id', 'type.id']
+            searchableAttributes: ['name', 'art', 'brand.name', 'category.name', 'type.name']
+
+
+
+        # Define entities or documents that should be indexed to Meilisearch.
+        # See https://github.com/meilisearch/meilisearch-symfony/wiki/configure-searchable-

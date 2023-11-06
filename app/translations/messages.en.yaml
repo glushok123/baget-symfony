@@ -1,0 +1,14 @@
+success: true
+failed: false
+email_approved: Email approved
+user_already_exists: User already exists
+user_could_not_be_found: User could not be found
+country_could_not_be_found: Country could not be found
+messenger_could_not_be_found: Messenger could not be found
+organization_already_exists: Organization already exists
+organization_could_not_be_found: Organization could not be found
+organization_type_could_not_be_found: Organization type could not be found
+code_sent: Code sent
+article_could_not_be_found: Article could not be found
+image_could_not_be_uploaded: Image could not be uploaded
+organization_exists_user_could_not_be_created: Organization exists, User could not be created

@@ -1,0 +1,84 @@
+version: "3.7"
+
+volumes:
+  mysql-data: { }
+  redis-data:
+
+services:
+  nginx:
+    container_name: nginx-baget
+    build:
+      context: ./
+      dockerfile: docker/nginx/Dockerfile
+    volumes:
+      - ./app:/app
+    ports:
+      - "91:80"
+    networks:
+      - traefik-public
+      - default
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik-public
+      - traefik.http.routers.backend.rule=Host(`api.test.bulat.store`) || Host(`admin.test.bulat.store`)
+      - traefik.http.routers.backend.entryPoints=websecure
+      - traefik.http.routers.backend.tls.certresolver=myresolver
+
+  meilisearch:
+    image: "getmeili/meilisearch:v1.4"
+    restart: unless-stopped
+    ports:
+      - "7720:7700"
+    volumes:
+      - /var/local/meilisearch:/data.ms
+    networks:
+      - traefik-public
+      - default
+    env_file:
+      - ./app/.msenv
+    environment:
+      MEILI_ENV: "development"
+
+  php-fpm:
+    container_name: php-fpm-baget
+    build:
+      context: ./
+      dockerfile: docker/php-fpm/Dockerfile
+      args:
+        user_uid: "$user_uid"
+        user_gid: "$user_gid"
+    environment:
+      XDEBUG_CONFIG: "remote_host=host.docker.internal remote_enable=1"
+      PHP_IDE_CONFIG: serverName=DockerTonex
+    expose:
+      - 9005
+    volumes:
+      - ./app:/app
+
+  db:
+    container_name: db-baget
+    image: mariadb
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD}
+      MARIADB_ROOT_PASSWORD_HASH: ${MARIADB_ROOT_PASSWORD_HASH}
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: ${MARIADB_ALLOW_EMPTY_ROOT_PASSWORD}
+      MARIADB_RANDOM_ROOT_PASSWORD: ${MARIADB_RANDOM_ROOT_PASSWORD}
+
+    restart: always
+    ports:
+      - "3320:3306"
+
+  adminer:
+    image: adminer
+    ports:
+      - "8100:8080"
+
+networks:
+  traefik-public:
+    external: true
