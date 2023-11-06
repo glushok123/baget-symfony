@@ -1,1 +1,1 @@
-<h1>BULAT.STORE</h1>
+<h1>BAGET</h1>

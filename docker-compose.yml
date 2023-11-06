@@ -20,7 +20,6 @@ services:
     labels:
       - traefik.enable=true
       - traefik.docker.network=traefik-public
-      - traefik.http.routers.backend.rule=Host(`api.test.bulat.store`) || Host(`admin.test.bulat.store`)
       - traefik.http.routers.backend.entryPoints=websecure
       - traefik.http.routers.backend.tls.certresolver=myresolver
 

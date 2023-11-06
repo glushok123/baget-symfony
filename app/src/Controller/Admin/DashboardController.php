@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractDashboardController
 {
-    #[Route('/', name: 'admin', host: '%admin_url%')]
+    #[Route('admin', name: 'admin')]
     public function index(): Response
     {
 //        return parent::index();
@@ -57,23 +57,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Пользователи', 'fas fa-list', User::class);
-        yield MenuItem::linkToCrud('Организации', 'fas fa-list', Organization::class);
         yield MenuItem::linkToCrud('Роли', 'fas fa-list', RoleGroup::class);
-        yield MenuItem::linkToCrud('Новости', 'fas fa-list', Article::class);
 
-        yield MenuItem::subMenu('Управление каталогом', 'fas fa-list')->setSubItems([
-            MenuItem::linkToCrud('Товары', 'fas fa-list', Product::class),
-            MenuItem::linkToCrud('Категории', 'fas fa-list', ProductCategory::class),
-            MenuItem::linkToCrud('Бренды', 'fas fa-list', ProductBrand::class),
-            MenuItem::linkToCrud('Модели', 'fas fa-list', ProductModel::class),
-            MenuItem::linkToCrud('Типы', 'fas fa-list', ProductType::class),
-        ]);
-
-        yield MenuItem::subMenu('Обращения/претензии', 'fas fa-list')->setSubItems([
-            MenuItem::linkToCrud('Обращения', 'fas fa-list', Appeal::class),
-            MenuItem::linkToCrud('Категории', 'fas fa-list', AppealCategory::class),
-            MenuItem::linkToCrud('Статусы', 'fas fa-list', AppealStatus::class),
-            MenuItem::linkToCrud('Сообщения', 'fas fa-list', AppealMessage::class),
-        ]);
     }
 }

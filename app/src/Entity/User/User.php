@@ -65,15 +65,6 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
     #[ORM\Column(type: "phone_number", length: 255, unique: true)]
     private ?PhoneNumber $phone = null;
 
-    #[MaxDepth(1)]
-    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Organization::class, cascade: ['persist'])]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?Collection $organizations;
-
-    #[MaxDepth(1)]
-    #[ORM\OneToMany(mappedBy: 'employee', targetEntity: Organization::class, cascade: ['persist'])]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?Collection $organizationsEmployee;
 
     #[MaxDepth(1)]
     #[ORM\ManyToMany(mappedBy: 'users', targetEntity: RoleGroup::class,  cascade: ['persist'])]
@@ -111,20 +102,11 @@ class User implements PasswordAuthenticatedUserInterface, UserInterface
     #[ORM\Column(nullable: true)]
     private ?int $invitedBy = null;
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Appeal::class)]
-    private Collection $appeals;
-
-    #[ORM\OneToMany(mappedBy: 'sender', targetEntity: AppealMessage::class)]
-    private Collection $appealMessages;
 
     public function __construct()
     {
-        $this->organizations = new ArrayCollection();
-        $this->organizationsEmployee = new ArrayCollection();
         $this->roleGroups = new ArrayCollection();
         $this->passwordRecoveryHash = new Hash();
-        $this->appeals = new ArrayCollection();
-        $this->appealMessages = new ArrayCollection();
     }
 
     public function getId(): ?int
